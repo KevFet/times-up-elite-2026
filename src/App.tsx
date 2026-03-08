@@ -4,13 +4,14 @@ import { useGameStore, Room } from './store'
 import Lobby from './Lobby'
 import Preparation from './Preparation'
 import Game from './Game'
-import { AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Languages } from 'lucide-react'
 
 function App() {
     const { room, setRoom, setTeams, setPlayers, setDeck } = useGameStore()
     const { i18n } = useTranslation()
+
+    console.log("🔄 APP RENDER: room.status =", room?.status, "- room.id =", room?.id)
 
     // Subscribe to real-time changes
     useEffect(() => {
@@ -21,7 +22,7 @@ function App() {
         fetchDeck()
 
         const roomSub = supabase.channel(`room_${room.id}`)
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` }, (payload) => {
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'rooms' }, (payload) => {
                 console.log("RDB ROOM UPDATE", payload)
                 const currentRoom = useGameStore.getState().room;
                 if (currentRoom) {
@@ -75,12 +76,12 @@ function App() {
                 </button>
             </div>
 
-            <AnimatePresence mode="wait">
+            <div className="flex-1 w-full h-full">
                 {!room && <Lobby key="lobby" />}
                 {room?.status === 'lobby' && <Lobby key="lobby-room" />}
                 {room?.status === 'preparation' && <Preparation key="prep" />}
                 {room?.status === 'playing' && <Game key="game" />}
-            </AnimatePresence>
+            </div>
         </div>
     )
 }
