@@ -127,14 +127,16 @@ export default function Preparation() {
             </div>
 
             {!ready && discarded.length === 2 && (
-                <motion.button
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    onClick={validateSelection}
-                    className="w-full max-w-sm py-4 rounded-2xl bg-white text-black font-bold text-lg hover:bg-white/90 transition shadow-[0_0_30px_rgba(255,255,255,0.3)] mb-10"
-                >
-                    Confirm Final Deck
-                </motion.button>
+                <div className="fixed bottom-10 left-0 w-full flex justify-center z-[100] px-6">
+                    <motion.button
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        onClick={validateSelection}
+                        className="w-full max-w-sm py-4 rounded-2xl bg-white text-black font-bold text-xl hover:bg-white/90 transition shadow-[0_0_50px_rgba(255,255,255,0.8)] border border-white"
+                    >
+                        Confirm Final Deck
+                    </motion.button>
+                </div>
             )}
         </motion.div>
     )

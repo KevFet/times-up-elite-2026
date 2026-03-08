@@ -21,8 +21,8 @@ function App() {
         fetchDeck()
 
         const roomSub = supabase.channel(`room_${room.id}`)
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` }, () => {
-                fetchRoomData()
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` }, (payload) => {
+                setRoom(payload.new as Room)
             })
             .on('postgres_changes', { event: '*', schema: 'public', table: 'teams', filter: `room_id=eq.${room.id}` }, () => {
                 fetchData()
@@ -33,18 +33,14 @@ function App() {
             .on('postgres_changes', { event: '*', schema: 'public', table: 'deck', filter: `room_id=eq.${room.id}` }, () => {
                 fetchDeck()
             })
-            .subscribe()
+            .subscribe((status, err) => {
+                console.log("Realtime status:", status, err)
+            })
 
         return () => {
             supabase.removeChannel(roomSub)
         }
     }, [room?.id])
-
-    const fetchRoomData = async () => {
-        if (!room?.id) return
-        const { data } = await supabase.from('rooms').select('*').eq('id', room.id).single()
-        if (data) setRoom(data as Room)
-    }
 
     const fetchData = async () => {
         if (!room?.id) return
