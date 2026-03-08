@@ -60,11 +60,12 @@ export default function Preparation() {
     }
 
     const checkEveryoneReady = async () => {
-        // Basic check: if deck has 40 cards, change status to playing
-        const { count } = await supabase.from('deck').select('*', { count: 'exact', head: true }).eq('room_id', room!.id)
-        if (count && count >= 20) { // For testing, let's say >=20 is enough
-            await supabase.from('rooms').update({ status: 'playing', current_round: 1 }).eq('id', room!.id)
-        }
+        // Optimistic UI for start
+        const optimRoom = { ...room!, status: 'playing' as const, current_round: 1 }
+        useGameStore.setState({ room: optimRoom })
+
+        // Trigger the change for everyone else
+        await supabase.from('rooms').update({ status: 'playing', current_round: 1 }).eq('id', room!.id)
     }
 
     return (
@@ -116,9 +117,9 @@ export default function Preparation() {
                             {player?.is_host && (
                                 <button
                                     onClick={checkEveryoneReady}
-                                    className="mt-10 px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition backdrop-blur-md"
+                                    className="mt-10 px-8 py-4 bg-white text-black font-black uppercase rounded-2xl shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:bg-white/90 transition hover:scale-105"
                                 >
-                                    Force Start (Testing)
+                                    Start Game
                                 </button>
                             )}
                         </motion.div>

@@ -58,7 +58,13 @@ export default function Game() {
 
     const advanceRound = async () => {
         if (!room) return
-        // Reset all cards to available, but maybe keep them mixed
+
+        // Optimistic Round Advance
+        useGameStore.setState({
+            room: { ...room, current_round: room.current_round + 1 },
+            deck: deck.map(c => ({ ...c, status: 'available' as const }))
+        })
+
         await supabase.from('deck').update({ status: 'available' }).eq('room_id', room.id)
         await supabase.from('rooms').update({ current_round: room.current_round + 1 }).eq('id', room.id)
     }
@@ -71,16 +77,20 @@ export default function Game() {
     const handleCardValidate = async (card: DeckCard) => {
         if (navigator.vibrate) navigator.vibrate([30, 50, 30]) // Haptic feedback
 
-        // Add point to player's team
+        // Add point to player's team optimistically
         if (player?.team_id) {
             const myTeam = teams.find(t => t.id === player.team_id)
             if (myTeam) {
-                await supabase.from('teams').update({ score: myTeam.score + 1 }).eq('id', myTeam.id)
+                const newTeams = teams.map(t => t.id === myTeam.id ? { ...t, score: t.score + 1 } : t)
+                useGameStore.setState({ teams: newTeams })
+                supabase.from('teams').update({ score: myTeam.score + 1 }).eq('id', myTeam.id).then()
             }
         }
 
-        // Mark card as played
-        await supabase.from('deck').update({ status: 'played', round_played: room?.current_round }).eq('id', card.id)
+        // Mark card as played optimistically
+        const newDeck = deck.map(c => c.id === card.id ? { ...c, status: 'played' as const, round_played: room?.current_round || 1 } : c)
+        useGameStore.setState({ deck: newDeck })
+        supabase.from('deck').update({ status: 'played', round_played: room?.current_round }).eq('id', card.id).then()
     }
 
     const handleCardPass = async () => {

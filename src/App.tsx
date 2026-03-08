@@ -22,7 +22,11 @@ function App() {
 
         const roomSub = supabase.channel(`room_${room.id}`)
             .on('postgres_changes', { event: '*', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` }, (payload) => {
-                setRoom(payload.new as Room)
+                console.log("RDB ROOM UPDATE", payload)
+                const currentRoom = useGameStore.getState().room;
+                if (currentRoom) {
+                    setRoom({ ...currentRoom, ...(payload.new as Partial<Room>) } as Room)
+                }
             })
             .on('postgres_changes', { event: '*', schema: 'public', table: 'teams', filter: `room_id=eq.${room.id}` }, () => {
                 fetchData()
