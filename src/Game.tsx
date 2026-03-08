@@ -98,8 +98,7 @@ export default function Game() {
     }
 
     const handleCardPass = async () => {
-        // Round 1: pass not allowed typically, but let's just cycle
-        if (room?.current_round === 1) return
+        if (currentDeck.length <= 1) return
         setCurrentWordIndex((prev) => (prev + 1) % currentDeck.length)
     }
 
@@ -155,7 +154,7 @@ export default function Game() {
                                 className="absolute w-full aspect-[3/4] glass-panel rounded-3xl flex flex-col items-center justify-center p-8 bg-white/10 backdrop-blur-2xl border-white/20"
                             >
                                 <div className="absolute top-4 w-full flex justify-between px-6 text-xs text-white/30 uppercase font-black">
-                                    <span>&larr; Pass (R2+)</span>
+                                    <span>&larr; Pass</span>
                                     <span>Validate &rarr;</span>
                                 </div>
                                 <h3 className="text-4xl font-black text-center drop-shadow-2xl capitalize">
