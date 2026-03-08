@@ -62,10 +62,16 @@ export default function Lobby() {
 
     const startGame = async () => {
         if (!room || !player?.is_host) return
+
+        // UI Optmiste: On force le changement d'écran instantanément
+        const optimRoom = { ...room, status: 'preparation' as const }
+        setRoom(optimRoom)
+
         const { data, error } = await supabase.from('rooms').update({ status: 'preparation' }).eq('id', room.id).select()
         if (error) {
             console.error(error)
             alert("Error: " + error.message)
+            setRoom(room) // Rollback en cas d'erreur
         } else if (data && data.length > 0) {
             setRoom(data[0] as Room)
         }
