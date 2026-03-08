@@ -122,15 +122,15 @@ export default function Game() {
             <div className="flex-1 w-full max-w-sm relative flex items-center justify-center">
                 {isPlaying ? (
                     <AnimatePresence>
-                        {currentDeck.length > 0 && (
+                        {currentDeck.length > 0 && currentDeck[currentWordIndex % currentDeck.length] && (
                             <motion.div
-                                key={currentDeck[currentWordIndex]?.id}
+                                key={currentDeck[currentWordIndex % currentDeck.length]?.id}
                                 drag="x"
                                 dragConstraints={{ left: 0, right: 0 }}
                                 dragElastic={1}
                                 onDragEnd={(_, info) => {
                                     if (info.offset.x > 100) {
-                                        handleCardValidate(currentDeck[currentWordIndex])
+                                        handleCardValidate(currentDeck[currentWordIndex % currentDeck.length])
                                     } else if (info.offset.x < -100) {
                                         handleCardPass()
                                     }
@@ -145,7 +145,7 @@ export default function Game() {
                                     <span>Validate &rarr;</span>
                                 </div>
                                 <h3 className="text-4xl font-black text-center drop-shadow-2xl capitalize">
-                                    {currentDeck[currentWordIndex]?.word}
+                                    {currentDeck[currentWordIndex % currentDeck.length]?.word}
                                 </h3>
                             </motion.div>
                         )}
