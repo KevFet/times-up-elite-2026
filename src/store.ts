@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export interface Player {
     id: string
@@ -44,15 +45,23 @@ interface GameState {
     setDeck: (deck: DeckCard[]) => void
 }
 
-export const useGameStore = create<GameState>((set) => ({
-    player: null,
-    room: null,
-    teams: [],
-    players: [],
-    deck: [],
-    setPlayer: (player) => set({ player }),
-    setRoom: (room) => set({ room }),
-    setTeams: (teams) => set({ teams }),
-    setPlayers: (players) => set({ players }),
-    setDeck: (deck) => set({ deck }),
-}))
+export const useGameStore = create<GameState>()(
+    persist(
+        (set) => ({
+            player: null,
+            room: null,
+            teams: [],
+            players: [],
+            deck: [],
+            setPlayer: (player) => set({ player }),
+            setRoom: (room) => set({ room }),
+            setTeams: (teams) => set({ teams }),
+            setPlayers: (players) => set({ players }),
+            setDeck: (deck) => set({ deck }),
+        }),
+        {
+            name: 'times-up-storage',
+            partialize: (state) => ({ player: state.player, room: state.room }),
+        }
+    )
+)
