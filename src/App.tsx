@@ -4,6 +4,7 @@ import { useGameStore, Room } from './store'
 import Lobby from './Lobby'
 import Preparation from './Preparation'
 import Game from './Game'
+import Finished from './Finished'
 import { useTranslation } from 'react-i18next'
 import { Languages } from 'lucide-react'
 
@@ -81,6 +82,7 @@ function App() {
                 {room?.status === 'lobby' && <Lobby key="lobby-room" />}
                 {room?.status === 'preparation' && <Preparation key="prep" />}
                 {room?.status === 'playing' && <Game key="game" />}
+                {room?.status === 'finished' && <Finished key="finished" />}
             </div>
         </div>
     )

@@ -50,9 +50,13 @@ export default function Game() {
 
         // Check if game over (round 3)
         if (room?.current_round === 3) {
-            setTimeout(() => alert('Game Over!'), 2000)
+            if (player?.is_host) {
+                supabase.from('rooms').update({ status: 'finished' }).eq('id', room.id).then()
+            }
         } else {
-            setTimeout(() => advanceRound(), 3000)
+            if (player?.is_host) {
+                setTimeout(() => advanceRound(), 3000)
+            }
         }
     }
 
