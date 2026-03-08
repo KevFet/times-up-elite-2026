@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 export interface Player {
     id: string
@@ -60,7 +60,8 @@ export const useGameStore = create<GameState>()(
             setDeck: (deck) => set({ deck }),
         }),
         {
-            name: 'times-up-storage',
+            name: 'times-up-session-v2',
+            storage: createJSONStorage(() => sessionStorage),
             partialize: (state) => ({ player: state.player, room: state.room }),
         }
     )
