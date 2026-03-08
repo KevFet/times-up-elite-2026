@@ -6,19 +6,53 @@ import { Check } from 'lucide-react'
 
 // Extended list of celebrities
 const CELEBRITIES = [
-    "Albert Einstein", "Marie Curie", "Leonardo DiCaprio", "Marilyn Monroe",
-    "Michael Jackson", "Freddie Mercury", "Steve Jobs", "Elon Musk",
-    "Lionel Messi", "Cristiano Ronaldo", "Serena Williams", "Beyoncé",
-    "Elvis Presley", "Abraham Lincoln", "Nelson Mandela", "Martin Luther King Jr.",
-    "Tom Cruise", "Brad Pitt", "Angelina Jolie", "Scarlett Johansson",
-    "Will Smith", "Johnny Depp", "Emma Watson", "Daniel Radcliffe",
-    "David Beckham", "Tiger Woods", "Michael Jordan", "LeBron James",
-    "Muhammad Ali", "Mike Tyson", "Oprah Winfrey", "Ellen DeGeneres",
-    "Rihanna", "Lady Gaga", "Taylor Swift", "Justin Bieber",
-    "Eminem", "Snoop Dogg", "Jay-Z", "Kanye West",
-    "Barack Obama", "Donald Trump", "John F. Kennedy", "Winston Churchill",
-    "Queen Elizabeth II", "Princess Diana", "Charles Darwin", "Isaac Newton",
-    "Galileo Galilei", "Nikola Tesla", "Stephen Hawking", "Bill Gates"
+    // Historical & Science
+    "Albert Einstein", "Marie Curie", "Leonardo da Vinci", "Isaac Newton", "Charles Darwin",
+    "Nikola Tesla", "Galileo Galilei", "Stephen Hawking", "Thomas Edison", "Alexander Graham Bell",
+    "Ada Lovelace", "Alan Turing", "Sigmund Freud", "Aristotle", "Plato", "Socrates",
+    "Cleopatra", "Julius Caesar", "Alexander the Great", "Napoleon Bonaparte", "Joan of Arc",
+    "Abraham Lincoln", "George Washington", "Winston Churchill", "Nelson Mandela", "Martin Luther King Jr.",
+    "Mahatma Gandhi", "Mother Teresa", "Anne Frank", "Rosa Parks", "Malcolm X", "Che Guevara",
+    // Music
+    "Michael Jackson", "Freddie Mercury", "Elvis Presley", "Beyoncé", "Taylor Swift",
+    "Rihanna", "Lady Gaga", "Justin Bieber", "Eminem", "Snoop Dogg", "Jay-Z", "Kanye West",
+    "Madonna", "Prince", "David Bowie", "John Lennon", "Paul McCartney", "Bob Marley",
+    "Kurt Cobain", "Jim Morrison", "Jimi Hendrix", "Amy Winehouse", "Whitney Houston", "Aretha Franklin",
+    "Adele", "Drake", "Ed Sheeran", "Ariana Grande", "Selena Gomez", "Katy Perry",
+    "Billie Eilish", "Dua Lipa", "Harry Styles", "Post Malone", "The Weeknd", "Bruno Mars",
+    "Shakira", "Jennifer Lopez", "Britney Spears", "Celine Dion", "Elton John", "Mick Jagger",
+    // Actors & Cinema
+    "Leonardo DiCaprio", "Marilyn Monroe", "Tom Cruise", "Brad Pitt", "Angelina Jolie",
+    "Scarlett Johansson", "Will Smith", "Johnny Depp", "Emma Watson", "Daniel Radcliffe",
+    "Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo", "Tom Holland", "Zendaya",
+    "Meryl Streep", "Tom Hanks", "Denzel Washington", "Morgan Freeman", "Samuel L. Jackson", "Al Pacino",
+    "Robert De Niro", "Julie Andrews", "Audrey Hepburn", "Grace Kelly", "Elizabeth Taylor", "Charlie Chaplin",
+    "Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan", "Bruce Lee", "Dwayne Johnson", "Kevin Hart",
+    "Margot Robbie", "Ryan Gosling", "Jennifer Lawrence", "Gal Gadot", "Natalie Portman", "Keanu Reeves",
+    "Benedict Cumberbatch", "Idris Elba", "Heath Ledger", "Joaquin Phoenix", "Christian Bale", "Hugh Jackman",
+    "George Clooney", "Julia Roberts", "Sandra Bullock", "Nicole Kidman", "Harrison Ford", "Carrie Fisher",
+    "Mark Hamill", "Ian McKellen", "Patrick Stewart", "Maggie Smith", "Viola Davis", "Chadwick Boseman",
+    // Sports
+    "Lionel Messi", "Cristiano Ronaldo", "Serena Williams", "Roger Federer", "Rafael Nadal", "Novak Djokovic",
+    "Michael Jordan", "LeBron James", "Kobe Bryant", "Shaquille O'Neal", "Tiger Woods", "David Beckham",
+    "Muhammad Ali", "Mike Tyson", "Conor McGregor", "Lewis Hamilton", "Michael Schumacher", "Usain Bolt",
+    "Pele", "Diego Maradona", "Zinedine Zidane", "Ronaldinho", "Neymar Jr", "Kylian Mbappé",
+    "Tom Brady", "Patrick Mahomes", "Simone Biles", "Michael Phelps", "Valentino Rossi", "Ayrton Senna",
+    "Stephen Curry", "Magic Johnson", "Larry Bird", "Kareem Abdul-Jabbar", "Venus Williams", "Maria Sharapova",
+    // Business & Tech
+    "Steve Jobs", "Elon Musk", "Bill Gates", "Jeff Bezos", "Mark Zuckerberg", "Warren Buffett",
+    "Richard Branson", "Oprah Winfrey", "Henry Ford", "Walt Disney", "Larry Page", "Sergey Brin",
+    "Jack Ma", "Tim Cook", "Sheryl Sandberg", "Larry Ellison", "Bernard Arnault", "Amancio Ortega",
+    // Arts & Literature
+    "Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Salvador Dalí", "Frida Kahlo", "Andy Warhol",
+    "William Shakespeare", "Charles Dickens", "Ernest Hemingway", "Mark Twain", "J.K. Rowling", "Stephen King",
+    "George Orwell", "Agatha Christie", "Oscar Wilde", "Leo Tolstoy", "Edgar Allan Poe", "Virginia Woolf",
+    // Modern Icons & TV
+    "Barack Obama", "Michelle Obama", "Donald Trump", "Joe Biden", "Vladimir Putin", "Pope Francis",
+    "Dalai Lama", "Princess Diana", "Queen Elizabeth II", "Prince William", "Kate Middleton", "Prince Harry",
+    "Meghan Markle", "Kim Kardashian", "Kylie Jenner", "Kendall Jenner", "Kourtney Kardashian", "Khloé Kardashian",
+    "Ellen DeGeneres", "Jimmy Fallon", "Jimmy Kimmel", "Conan O'Brien", "Gordon Ramsay", "Jamie Oliver",
+    "David Attenborough", "Bear Grylls", "Malala Yousafzai", "Greta Thunberg", "Edward Snowden", "Julian Assange"
 ];
 
 export default function Preparation() {
